@@ -1,73 +1,84 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# NestJS + PostgreSQL
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Source with workshop video
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+[Building a REST API with NestJS and Prisma - Marc Stammerjohann | Prisma Day 2021](https://www.youtube.com/watch?v=mmbd5hcQUaY)
 
-## Description
+[Building a REST API with NestJS and Prisma](https://www.notion.so/marcjulian/Building-a-REST-API-with-NestJS-and-Prisma-8296846a0fc54ac0b445ae9364805669)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Installation
+# Create a new project with nestJS:
 
 ```bash
-$ npm install
+nest new NAME
+
 ```
 
-## Running the app
+# INsert Prisma in to nestJS project:
 
 ```bash
-# development
-$ npm run start
+	npm install prisma --save-dev
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+	npx prisma init
 ```
 
-## Test
+# Seed, load or create database
+
+1. Update db in url into prisma scheme:
+    
+    ```bash
+    npx prisma db pull
+    ```
+    
+2. Update db in url from prisma schema:
+    
+    ```bash
+    npx prisma migrate dev --name init
+    ```
+    
+3. Seed db from seed.ts
+    
+    ```bash
+    npx prisma db seed
+    ```
+    
+    Remember to add prisma.seed into package  - [link](https://www.prisma.io/docs/guides/database/seed-database)
+    
+    ```json
+    			{
+    			  "name": "my-project",
+    			  "version": "1.0.0",
+    			  "prisma": {
+    			    "seed": "ts-node prisma/seed.ts"
+    			  },
+    			  "devDependencies": {
+    			    "@types/node": "^14.14.21",
+    			    "ts-node": "^9.1.1",
+    			    "typescript": "^4.1.3"
+    			  }
+    			}
+    ```
+    
+
+# Generate Prisma Client
+
+Redone this when update schema:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+	npx prisma generate
 ```
 
-## Support
+# Generate Module and service
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
 
-## Stay in touch
+nest generate module prisma
+nest generate service prisma
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Generate all module, source, controller for new
 
-## License
-
-Nest is [MIT licensed](LICENSE).
+```bash
+nest generate resource
+```
