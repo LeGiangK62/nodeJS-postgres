@@ -7,7 +7,7 @@ import { UpdateDepartmentDto } from './dto/update-department.dto';
 export class DepartmentsService {
   constructor(private prisma: PrismaService){}
   create(createDepartmentDto: CreateDepartmentDto) {
-    return 'This action adds a new department';
+    return this.prisma.department.create({data: createDepartmentDto});
   }
 
   findAll() {

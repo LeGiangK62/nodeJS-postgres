@@ -8,22 +8,36 @@ export class CompaniesService {
   constructor(private prisma: PrismaService){}
 
   create(createCompanyDto: CreateCompanyDto) {
-    return 'This action adds a new company';
+    return this.prisma.company.create({ data: createCompanyDto });
   }
 
   findAll() {
     return this.prisma.company.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} company`;
+  findOne(search: string) {
+    return this.prisma.company.findFirst({
+      where: {
+        OR: [ 
+          {name: search} , 
+          {id: (parseInt(search) || 0)} 
+        ] 
+      },
+    });
   }
 
   update(id: number, updateCompanyDto: UpdateCompanyDto) {
     return `This action updates a #${id} company`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} company`;
+  remove(search: string) {
+    return this.prisma.company.deleteMany({
+      where: {
+        OR: [ 
+          {name: search} , 
+          {id: (parseInt(search) || 0)} 
+        ] 
+      },
+    });
   }
 }

@@ -89,3 +89,12 @@ nest generate resource
 	constructor(private prisma: PrismaService){}
 	```
 	2.	Change function in xxx.controllers and xxx.service to have proper API.
+
+## Note: In order to POST:
+	```json
+	 {
+        "name": "Ai day",
+        "email": "aiday@gmail.com",
+        "dob": "13/09/1999"
+    }
+	```
