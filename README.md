@@ -82,3 +82,10 @@ nest generate service prisma
 ```bash
 nest generate resource
 ```
+
+## To creat REST API
+	1.	Add prisma service constructor to xxx.service to have prisma client
+	```bash
+	constructor(private prisma: PrismaService){}
+	```
+	2.	Change function in xxx.controllers and xxx.service to have proper API.
