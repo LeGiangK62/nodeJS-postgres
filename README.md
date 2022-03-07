@@ -69,7 +69,7 @@ Redone this when update schema:
 	npx prisma generate
 ```
 
-# Generate Module and service
+# Generate Module and service for prisma
 
 ```bash
 

@@ -8,8 +8,42 @@ datasource db {
 }
 
 model member {
-  id    Int    @id @default(autoincrement())
-  name  String @db.VarChar(50)
-  email String @db.VarChar(50)
-  dob   String @db.VarChar(10)
+  id            Int    @id @default(autoincrement())
+  name          String @db.VarChar(50)
+  email         String @db.VarChar(50)
+  dob           String @db.VarChar(10)
+}
+
+model company {
+  id            Int @unique @default(autoincrement())
+  name          String @db.VarChar(50)
+
+  dept   department[] // one company has many departments
+}
+
+model department {
+  id            Int @unique @default(autoincrement())
+  name          String @db.VarChar(50)
+  company_Id    Int
+
+  comp       company @relation(fields: [company_Id], references: [id]) // one department belongs to only one company
+  users         user[]  // one department has many users
+}
+
+model user {
+  id            Int @unique @default(autoincrement())
+  name          String @db.VarChar(50)
+  department_Id Int
+
+  dept    department @relation(fields: [department_Id], references: [id]) //one user belong to only one department
+  authored       result[] // one user has many result
+}
+
+model result {
+  id            Int @unique @default(autoincrement())
+  name          String @db.VarChar(50)
+  // time          DateTime @default(now())
+  user_Id       Int
+
+  authored          user @relation(fields: [user_Id], references: [id]) // one result belong to one user
 }
